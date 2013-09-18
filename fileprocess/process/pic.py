@@ -1,4 +1,5 @@
-﻿
+﻿import commands
+
 class GeneratePic():
     """
     文件生成图片列表
@@ -14,14 +15,30 @@ class GeneratePic():
         fileType=fileType.lower()
         if fileType=="doc":
             print "文件类型为DOC文件"
-            self.docToPic(picPath, filePath)
+            pdfFilePath=self.docToPdf(picPath, filePath)
+            print "pdfFilePath="+pdfFilePath
         else:
             print "文件暂时不支持转换为图片"
 
-    def docToPic(self,picPath,  file):
+    def docToPdf(self,picPath,  file):
         """
-            doc文件转换图片
+            convert doc to pdf
         """
         if not (file is None):
             print "开始转换文件"
+            try:
+                pdfFileDir=file
+                pdfFileDir=pdfFileDir.replace("\\", "/")
+                pdfFileDir=pdfFileDir[0:pdfFileDir.rfind("/")]
+                print "pdfFileDir="+pdfFileDir
+                docFileName=file[file.rfind("/"):]
+                print "docFileName="+docFileName
+                status, output = commands.getstatusoutput("libreoffice --headless --convert-to pdf %s --outdir %s" %(file, pdfFileDir))
+                if status==0:
+                    print "convert doc to pdf success"
+                    return pdfFileDir+docFileName
+                else:
+                    print output
+            except Exception, e:
+                print e
             print "转换文件结束"

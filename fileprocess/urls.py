@@ -16,5 +16,5 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     
     #process app
-    url(r'^process/',include('fileprocess.process.urls')),
+    url(r'^fileprocess/',include('fileprocess.process.urls')),
 )
