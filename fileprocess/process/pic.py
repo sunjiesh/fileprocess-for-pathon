@@ -1,4 +1,6 @@
 ﻿import commands
+import os
+import uuid
 
 class GeneratePic():
     """
@@ -9,14 +11,40 @@ class GeneratePic():
         """
         处理程序入口，根据附件的类型，调用不同的方法
         """
-        fileType=fieldsData["fileType"]
+        
         picPath=fieldsData["picPath"]
         filePath=fieldsData["filePath"]
+        
+        if picPath=="":
+            picPath="/tmp/"+str(uuid.uuid1()).replace("-", "")+"/"
+        print "picPath="+picPath
+        
+        d = os.path.dirname(picPath)
+        print(d)
+        if not os.path.exists(d):
+            print "mkdir "+picPath
+            os.makedirs(d)
+        
+        
+        fileType=filePath[filePath.rfind(".")+1:]
         fileType=fileType.lower()
         if fileType=="doc":
             print "文件类型为DOC文件"
             pdfFilePath=self.docToPdf(picPath, filePath)
-            print "pdfFilePath="+pdfFilePath
+            if pdfFilePath!="":
+                try:
+                    
+
+                    print "convert image to dir %s"%pdfFilePath
+                    exeCmd="convert %s %s/convert.png" %(pdfFilePath, picPath)
+                    print "execute cmd "+exeCmd
+                    status, output = commands.getstatusoutput(exeCmd)
+                    if status==0:
+                        for imageFile in os.listdir(picPath):
+                            print picPath+"/"+imageFile
+                except Exception, e:
+                    print e
+                    
         else:
             print "文件暂时不支持转换为图片"
 
@@ -33,12 +61,17 @@ class GeneratePic():
                 print "pdfFileDir="+pdfFileDir
                 docFileName=file[file.rfind("/"):]
                 print "docFileName="+docFileName
+                pdfFileName=docFileName.replace(".doc", ".pdf")
                 status, output = commands.getstatusoutput("libreoffice --headless --convert-to pdf %s --outdir %s" %(file, pdfFileDir))
                 if status==0:
+                    print output
+                    pdfFilePath=pdfFileDir+pdfFileName
+                    print "pdfFilePath="+pdfFilePath
                     print "convert doc to pdf success"
-                    return pdfFileDir+docFileName
+                    return pdfFilePath
                 else:
                     print output
             except Exception, e:
                 print e
             print "转换文件结束"
+            return ""
