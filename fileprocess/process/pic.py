@@ -32,7 +32,7 @@ class GeneratePic():
         
         fileType=filePath[filePath.rfind(".")+1:]
         fileType=fileType.lower()
-        if fileType=="doc":
+        if fileType=="doc" or fileType=="docx":
             print "文件类型为DOC文件"
             pdfFilePath=self.docToPdf(picPath, filePath)
             if pdfFilePath!="":
@@ -69,7 +69,8 @@ class GeneratePic():
                 print "pdfFileDir="+pdfFileDir
                 docFileName=file[file.rfind("/"):]
                 print "docFileName="+docFileName
-                pdfFileName=docFileName.replace(".doc", ".pdf")
+                pdfFileName=docFileName.replace(".docx", ".pdf")
+                pdfFileName=pdfFileName.replace(".doc", ".pdf")
                 status, output = commands.getstatusoutput("libreoffice --headless --convert-to pdf %s --outdir %s" %(file, pdfFileDir))
                 if status==0:
                     print output
