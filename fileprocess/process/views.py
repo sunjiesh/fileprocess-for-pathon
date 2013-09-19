@@ -10,7 +10,7 @@ def index(request):
     return HttpResponse("Hello, world. You're at the poll index.")
  
 @csrf_exempt
-def pic(request):
+def filepic(request):
     """请求处理"""
     #读取请求
     print request.method
