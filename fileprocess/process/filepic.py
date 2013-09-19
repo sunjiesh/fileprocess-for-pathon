@@ -77,7 +77,7 @@ class GeneratePic():
                 print "docFileName="+docFileName
                 pdfFileName=docFileName.replace(".docx", "")
                 pdfFileName=pdfFileName.replace(".doc", "")
-                pdfFileName=pdfFileName.replace(".xlst", "")
+                pdfFileName=pdfFileName.replace(".xlsx", "")
                 pdfFileName=pdfFileName.replace(".xls", "")
                 pdfFileName=pdfFileName+".pdf"
                 status, output = commands.getstatusoutput("libreoffice --headless --convert-to pdf %s --outdir %s" %(file, pdfFileDir))
