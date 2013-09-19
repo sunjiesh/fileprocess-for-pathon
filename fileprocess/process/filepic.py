@@ -54,6 +54,9 @@ class GeneratePic():
             errorMsg="文件暂时不支持转换为图片"
             print errorMsg
         
+        #sort
+        imageJsonArray=sorted(imageJsonArray, key=lambda x:int(x[x.rfind("/")+9:-4]))
+        
         resultJson["imageList"]=imageJsonArray
         resultJson["errorMsg"]=errorMsg
         print resultJson
@@ -74,7 +77,7 @@ class GeneratePic():
                 print "docFileName="+docFileName
                 pdfFileName=docFileName.replace(".docx", "")
                 pdfFileName=pdfFileName.replace(".doc", "")
-                pdfFileName=docFileName.replace(".xlst", "")
+                pdfFileName=pdfFileName.replace(".xlst", "")
                 pdfFileName=pdfFileName.replace(".xls", "")
                 pdfFileName=pdfFileName+".pdf"
                 status, output = commands.getstatusoutput("libreoffice --headless --convert-to pdf %s --outdir %s" %(file, pdfFileDir))
