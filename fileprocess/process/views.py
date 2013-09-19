@@ -1,4 +1,5 @@
-﻿# Create your views here.
+﻿# coding=utf-8
+# Create your views here.
 
 import json
 from django.http import HttpResponse
@@ -24,5 +25,6 @@ def filepic(request):
         cls=GeneratePic()
         resultJson=cls.enter(fieldsData)
         resultJson["responseId"]=requestId
+        print resultJson
         return HttpResponse(str(resultJson)) 
     return HttpResponse("Hello, world. You're at the pic index.") 

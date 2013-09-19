@@ -1,4 +1,6 @@
-﻿import commands
+﻿# coding=utf-8
+
+import commands
 import os
 import uuid
 
@@ -49,11 +51,12 @@ class GeneratePic():
                     print e
                     errorMsg="文件转换失败"
         else:
-            print "文件暂时不支持转换为图片"
             errorMsg="文件暂时不支持转换为图片"
+            print errorMsg
         
         resultJson["imageList"]=imageJsonArray
         resultJson["errorMsg"]=errorMsg
+        print resultJson
         return resultJson
         
     def docToPdf(self,picPath,  file):

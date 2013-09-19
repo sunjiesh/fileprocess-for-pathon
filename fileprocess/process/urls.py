@@ -1,4 +1,5 @@
-﻿from django.conf.urls import patterns, url
+﻿#coding=utf-8
+from django.conf.urls import patterns, url
 
 import views
 
