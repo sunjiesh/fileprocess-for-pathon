@@ -1,7 +1,11 @@
 文件转换
-http://localhost:8000/fileprocess/filetopic
+    http://localhost:8000/fileprocess/filetopic
 request：
     {"requestId":"filetopic","fields":{"picPath":"","filePath":"/home/tom/Documents/test1.doc"}}
 response：
     
     {'errorMsg': '', 'imageList': ['/tmp/cb33033020c811e3a408c86000cdec7a//convert.png'], 'responseId': 'filetopic'}
+    
+memo：
+    suport：
+        doc/docx/xls/xlst to pdf to png
