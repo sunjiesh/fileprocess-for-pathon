@@ -9,3 +9,10 @@ response：
 memo：
     suport：
         doc/docx/xls/xlst to pdf to png
+===============================================================================================================================================
+读取文件
+    http://localhost:8000/fileprocess/getpic
+request:
+    {"requestId":"getpic","fields":{"picPath":"/tmp/d02d8ba2212311e3a470c86000cdec7a//convert-0.png"}}
+response:
+    file
