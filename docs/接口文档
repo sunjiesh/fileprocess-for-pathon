@@ -8,7 +8,7 @@ response：
     
 memo：
     suport：
-        doc/docx/xls/xlst to pdf to png
+        doc/docx/xls/xlsx to pdf to png
 ===============================================================================================================================================
 读取文件
     http://localhost:8000/fileprocess/getpic
