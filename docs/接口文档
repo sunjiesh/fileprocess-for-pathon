@@ -1,0 +1,7 @@
+文件转换
+http://localhost:8000/fileprocess/pic
+request：
+    {"requestId":"file","fields":{"fileType":"doc","picPath":"","filePath":"/home/tom/Documents/test1.doc"}}
+response：
+    
+    {'errorMsg': '', 'imageList': ['/tmp/cb33033020c811e3a408c86000cdec7a//convert.png'], 'responseId': 'file'}
