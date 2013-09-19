@@ -18,7 +18,11 @@ def pic(request):
         jsonData=request.raw_post_data 
         print jsonData
         jsonData=json.loads(jsonData)
+        requestId=jsonData["requestId"]
+        requestId=str(requestId)
         fieldsData=jsonData["fields"]
         cls=GeneratePic()
-        cls.enter(fieldsData)
+        resultJson=cls.enter(fieldsData)
+        resultJson["responseId"]=requestId
+        return HttpResponse(str(resultJson)) 
     return HttpResponse("Hello, world. You're at the pic index.") 

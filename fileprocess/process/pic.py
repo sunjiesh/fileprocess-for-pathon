@@ -12,6 +12,10 @@ class GeneratePic():
         处理程序入口，根据附件的类型，调用不同的方法
         """
         
+        resultJson={}
+        imageJsonArray=[]
+        errorMsg=""
+        
         picPath=fieldsData["picPath"]
         filePath=fieldsData["filePath"]
         
@@ -33,8 +37,6 @@ class GeneratePic():
             pdfFilePath=self.docToPdf(picPath, filePath)
             if pdfFilePath!="":
                 try:
-                    
-
                     print "convert image to dir %s"%pdfFilePath
                     exeCmd="convert %s %s/convert.png" %(pdfFilePath, picPath)
                     print "execute cmd "+exeCmd
@@ -42,12 +44,18 @@ class GeneratePic():
                     if status==0:
                         for imageFile in os.listdir(picPath):
                             print picPath+"/"+imageFile
+                            imageJsonArray.append(picPath+"/"+imageFile)
                 except Exception, e:
                     print e
-                    
+                    errorMsg="文件转换失败"
         else:
             print "文件暂时不支持转换为图片"
-
+            errorMsg="文件暂时不支持转换为图片"
+        
+        resultJson["imageList"]=imageJsonArray
+        resultJson["errorMsg"]=errorMsg
+        return resultJson
+        
     def docToPdf(self,picPath,  file):
         """
             convert doc to pdf
