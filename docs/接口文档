@@ -1,5 +1,5 @@
 文件转换
-http://localhost:8000/fileprocess/filepic
+http://localhost:8000/fileprocess/filetopic
 request：
     {"requestId":"filetopic","fields":{"picPath":"","filePath":"/home/tom/Documents/test1.doc"}}
 response：

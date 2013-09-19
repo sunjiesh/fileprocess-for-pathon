@@ -5,13 +5,13 @@ import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from pic import GeneratePic
+from filepic import GeneratePic
 
 def index(request):
     return HttpResponse("Hello, world. You're at the poll index.")
  
 @csrf_exempt
-def filepic(request):
+def filetopic(request):
     """请求处理"""
     #读取请求
     print request.method
