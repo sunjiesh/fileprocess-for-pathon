@@ -41,12 +41,14 @@ class GeneratePic():
                 try:
                     print "convert image to dir %s"%pdfFilePath
                     exeCmd="convert %s %s/convert.png" %(pdfFilePath, picPath)
-                    print "execute cmd "+exeCmd
+                    print "start execute cmd "+exeCmd
                     status, output = commands.getstatusoutput(exeCmd)
                     if status==0:
+                        print "执行Convert命令结束"
                         for imageFile in os.listdir(picPath):
-                            print picPath+"/"+imageFile
-                            imageJsonArray.append(picPath+"/"+imageFile)
+                            tempPicPath=picPath+"/"+imageFile
+                            print "图片文件是"+tempPicPath
+                            imageJsonArray.append(tempPicPath)
                 except Exception, e:
                     print e
                     errorMsg="文件转换失败"
@@ -54,8 +56,10 @@ class GeneratePic():
             errorMsg="文件暂时不支持转换为图片"
             print errorMsg
         
+        print "需要对imageJsonArray进行排序"
         #sort
-        imageJsonArray=sorted(imageJsonArray, key=lambda x:int(x[x.rfind("/")+9:-4]))
+        if imageJsonArray.__len__()>1:
+            imageJsonArray=sorted(imageJsonArray, key=lambda x:int(x[x.rfind("/")+9:-4]))
         
         resultJson["imageList"]=imageJsonArray
         resultJson["errorMsg"]=errorMsg
