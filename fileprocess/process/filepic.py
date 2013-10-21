@@ -53,12 +53,11 @@ class GeneratePic():
                     print e
                     errorMsg="文件转换失败"
         else:
-            errorMsg="文件暂时不支持转换为图片"
+            errorMsg="文件类型不支持"
             print errorMsg
-        
-        print "需要对imageJsonArray进行排序"
         #sort
         if imageJsonArray.__len__()>1:
+            print "对imageJsonArray进行排序"
             imageJsonArray=sorted(imageJsonArray, key=lambda x:int(x[x.rfind("/")+9:-4]))
         
         resultJson["imageList"]=imageJsonArray

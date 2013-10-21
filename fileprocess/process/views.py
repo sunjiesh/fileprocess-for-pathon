@@ -25,8 +25,9 @@ def filetopic(request):
         cls=GeneratePic()
         resultJson=cls.enter(fieldsData)
         resultJson["responseId"]=requestId
-        print resultJson
-        return HttpResponse(str(resultJson)) 
+        #转换成JSON，解决中文问题
+        resultJson=json.dumps(resultJson,encoding="UTF-8",ensure_ascii=False)
+        return HttpResponse(resultJson)
     return HttpResponse("Hello, world. You're at the pic index,Please use post method") 
 
 @csrf_exempt
