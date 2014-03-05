@@ -37,21 +37,7 @@ class GeneratePic():
         if fileType=="doc" or fileType=="docx" or fileType=="xls" or fileType=="xlst":
             print "文件类型为DOC文件"
             pdfFilePath=self.docToPdf(picPath, filePath)
-            if pdfFilePath!="":
-                try:
-                    print "convert image to dir %s"%pdfFilePath
-                    exeCmd="convert %s %s/convert.png" %(pdfFilePath, picPath)
-                    print "start execute cmd "+exeCmd
-                    status, output = commands.getstatusoutput(exeCmd)
-                    if status==0:
-                        print "执行Convert命令结束"
-                        for imageFile in os.listdir(picPath):
-                            tempPicPath=picPath+"/"+imageFile
-                            print "图片文件是"+tempPicPath
-                            imageJsonArray.append(tempPicPath)
-                except Exception, e:
-                    print e
-                    errorMsg="文件转换失败"
+            imageJsonArray,errorMsg=self.pdfToPic(pdfFilePath,picPath,imageJsonArray,errorMsg)
         else:
             errorMsg="文件类型不支持"
             print errorMsg
@@ -96,3 +82,24 @@ class GeneratePic():
                 print e
             print "转换文件结束"
             return ""
+            
+    
+            
+    def pdfToPic(self,pdfFilePath,picPath,imageJsonArray,errorMsg):
+        """PDF转换PIC"""
+        if pdfFilePath!="":
+                try:
+                    print "convert image to dir %s"%pdfFilePath
+                    exeCmd="convert %s %s/convert.png" %(pdfFilePath, picPath)
+                    print "start execute cmd "+exeCmd
+                    status, output = commands.getstatusoutput(exeCmd)
+                    if status==0:
+                        print "执行Convert命令结束"
+                        for imageFile in os.listdir(picPath):
+                            tempPicPath=picPath+"/"+imageFile
+                            print "图片文件是"+tempPicPath
+                            imageJsonArray.append(tempPicPath)
+                except Exception, e:
+                    print e
+                    errorMsg="文件转换失败"
+        return imageJsonArray,errorMsg
