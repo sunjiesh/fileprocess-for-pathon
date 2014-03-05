@@ -38,6 +38,8 @@ class GeneratePic():
             print "文件类型为DOC文件"
             pdfFilePath=self.docToPdf(picPath, filePath)
             imageJsonArray,errorMsg=self.pdfToPic(pdfFilePath,picPath,imageJsonArray,errorMsg)
+        elif fileType=='pdf':
+            imageJsonArray,errorMsg=self.pdfToPic(filePath,picPath,imageJsonArray,errorMsg)
         else:
             errorMsg="文件类型不支持"
             print errorMsg
