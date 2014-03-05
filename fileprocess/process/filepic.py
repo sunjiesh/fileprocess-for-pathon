@@ -92,6 +92,7 @@ class GeneratePic():
         if pdfFilePath!="":
                 try:
                     print "convert image to dir %s"%pdfFilePath
+                    pdfFilePath=pdfFilePath.encode('utf-8')
                     exeCmd="convert %s %s/convert.png" %(pdfFilePath, picPath)
                     print "start execute cmd "+exeCmd
                     status, output = commands.getstatusoutput(exeCmd)
