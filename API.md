@@ -1,0 +1,19 @@
+文件转换
+> http://localhost:8000/fileprocess/filetopic
+request：
+> {"requestId":"filetopic","fields":{"picPath":"","filePath":"/home/tom/Documents/test1.doc"}}
+response：
+
+> {'errorMsg': '', 'imageList': ['/tmp/cb33033020c811e3a408c86000cdec7a//convert.png'], 'responseId': 'filetopic'}
+
+memo：
+> suport：
+> > doc/docx/xls/xlsx to pdf to png
+
+读取文件
+
+> http://localhost:8000/fileprocess/getpic
+request:
+> {"requestId":"getpic","fields":{"picPath":"/tmp/d02d8ba2212311e3a470c86000cdec7a//convert-0.png"}}
+response:
+> file
